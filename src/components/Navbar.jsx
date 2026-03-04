@@ -7,7 +7,7 @@ export default function Navbar() {
         <nav className={styles.navbar} aria-label="Navegação principal">
             {/* Brand */}
             <Link to="/" className={styles.brand}>
-                TI<span>Blog</span>
+                TI <span>Blog</span>
             </Link>
 
             <ul className={styles.links_list}>

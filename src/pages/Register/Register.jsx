@@ -1,24 +1,27 @@
+import { useAuthentication } from "../../hooks/useAuthentication"
 import styles from "./register.module.css"
 
 import { useState, useEffect } from "react"
 
 const Register = () => {
-    const [displayname, setDisplayName] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [confirmpassword, setConfirmPassword] = useState("")
-    const [error, setError] = useState("")
+    const [displayname, setDisplayName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmpassword, setConfirmPassword] = useState("");
+    const [error, setError] = useState("");
+
+    const { createUser, error: AuthError, loading } = useAuthentication;
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        setError("")
+        setError("");
 
         const user = {
             displayname,
             email,
             password,
-        }
+        };
 
         if (password !== confirmpassword) {
             setError("As senhas precisam ser Iguais seu animal, confirma essa porra carae")
@@ -82,6 +85,6 @@ const Register = () => {
             </form>
         </div>
     )
-}
+};
 
 export default Register
