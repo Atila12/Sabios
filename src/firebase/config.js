@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestire } from "firebase/firebase";
+import { getFirestore } from "firebase/firestore";
 import E from "react-script";
 
 const firebaseConfig = {
