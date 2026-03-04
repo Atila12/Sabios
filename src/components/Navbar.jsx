@@ -2,9 +2,11 @@
 import { Link, NavLink } from "react-router-dom";
 import { useAuthValue } from "../context/AuthContext"; // ajuste o caminho se for diferente
 import styles from "./Navbar.module.css"; // confira o case e o caminho
+import { useAuthentication } from "../hooks/useAuthentication";
 
 export default function Navbar() {
   const { user } = useAuthValue(); // agora o user existe neste componente
+  const { logout } = useAuthentication();
 
   return (
     <nav className={styles.navbar} aria-label="Navegação principal">
@@ -73,6 +75,13 @@ export default function Navbar() {
             Sobre
           </NavLink>
         </li>
+        {user && (
+            <li>
+                <button onClick={logout}>
+                    Sair
+                </button>
+            </li>
+        )}
       </ul>
     </nav>
   );
