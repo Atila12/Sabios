@@ -1,50 +1,79 @@
-// Navbar.jsx (ajustado)
+// src/components/Navbar.jsx
 import { Link, NavLink } from "react-router-dom";
-import styles from "./Navbar.module.css";
+import { useAuthValue } from "../context/AuthContext"; // ajuste o caminho se for diferente
+import styles from "./Navbar.module.css"; // confira o case e o caminho
 
 export default function Navbar() {
-    return (
-        <nav className={styles.navbar} aria-label="Navegação principal">
-            {/* Brand */}
-            <Link to="/" className={styles.brand}>
-                TI <span>Blog</span>
-            </Link>
+  const { user } = useAuthValue(); // agora o user existe neste componente
 
-            <ul className={styles.links_list}>
-                <li>
-                    <NavLink
-                        to="/"
-                        end
-                        className={({ isActive }) => (isActive ? styles.active : "")}
-                    >
-                        Home
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        to="/entrar"
-                        className={({ isActive }) => (isActive ? styles.active : "")}
-                    >
-                        Entrar
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        to="/register"
-                        className={({ isActive }) => (isActive ? styles.active : "")}
-                    >
-                        Cadastrar
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        to="/about"
-                        className={({ isActive }) => (isActive ? styles.active : "")}
-                    >
-                        About
-                    </NavLink>
-                </li>
-            </ul>
-        </nav>
-    );
+  return (
+    <nav className={styles.navbar} aria-label="Navegação principal">
+      {/* Brand */}
+      <Link to="/" className={styles.brand}>
+        TI <span>Blog</span>
+      </Link>
+
+      <ul className={styles.links_list}>
+        <li>
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) => (isActive ? styles.active : "")}
+          >
+            Home
+          </NavLink>
+        </li>
+
+        {!user && (
+          <>
+            <li>
+              <NavLink
+                to="/login" // padronize a rota em minúsculas
+                className={({ isActive }) => (isActive ? styles.active : "")}
+              >
+                Entrar
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/register"
+                className={({ isActive }) => (isActive ? styles.active : "")}
+              >
+                Cadastrar
+              </NavLink>
+            </li>
+          </>
+        )}
+        {user && (
+            <>
+            <li>
+              <NavLink
+                to="/posts/create" // padronize a rota em minúsculas
+                className={({ isActive }) => (isActive ? styles.active : "")}
+              >
+                Novo post
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard" // padronize a rota em minúsculas
+                className={({ isActive }) => (isActive ? styles.active : "")}
+              >
+                Dashboard
+              </NavLink>
+            </li>
+          </>
+        )}
+
+        <li>
+          <NavLink
+            to="/about"
+            className={({ isActive }) => (isActive ? styles.active : "")}
+          >
+            Sobre
+          </NavLink>
+        </li>
+      </ul>
+    </nav>
+  );
 }
