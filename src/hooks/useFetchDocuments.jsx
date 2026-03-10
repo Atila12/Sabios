@@ -1,20 +1,12 @@
 import { useState, useEffect } from "react";
 import { db } from "../firebase/config";
-import {
-    collection,
-    query,
-    orderBy,
-    onSnapshot,
-    where,
-    QuerySnapshot
-}
-    from "firebase/firestore";
+import { collection, query, orderBy, onSnapshot, where } from "firebase/firestore";
 
 export const useFetchDocuments = (docCollection, search = null, uid = null) => {
 
-    const [documents, setDocuments] = useState(null);
-    const [erros, setError] = useState(null);
-    const [loging, setLoading] = useState(null);
+    const [documents, setDocuments] = useState([]);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(null);
 
     // del with memory leak
     const [cancelled, setCancelled] = useState(false);
@@ -36,11 +28,11 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
                 // dashboard
                 q = await query(collectionRef, orderBy("createdAt", "desc"));
 
-                await onSnapshot(q, (QuerySnapshot) => {
+                await onSnapshot(q, (querySnapshot) => {
 
                     setDocuments(
 
-                        QuerySnapshot.docs.map((doc) => ({
+                        querySnapshot.docs?.map((doc) => ({
                             id: doc.id,
                             ...doc.data(),
                         }))
@@ -52,15 +44,19 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
             } catch (error) {
                 console.log(error);
                 setError(error.message);
-            }
 
+                setLoading(false);
+            }
         }
+        loadData();
 
     }, [docCollection, search, uid, cancelled]);
 
+
     useEffect(() => {
         return () => setCancelled(true);
-    },[]);
+    }, []);
 
     return { documents, loading, error };
 };
+

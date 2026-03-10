@@ -28,16 +28,16 @@ const CreatePost = () => {
 
     //validar URL da imagem
     try {
-      new URL(image)
+      new URL(image);
     } catch (error) {
       setFormError("A imagem precisa ser uma URL.")
     }
     //criar o array de tags
-    const tagArray = tags.split(",").map((tag) => tag.trim().toLowerCase());
+    const tagsArray = tags.split(",").map((tag) => tag.trim().toLowerCase());
 
     //checar todos os valores
     if(!title || !image || !tags || !body ) {
-      setFormError("Por favor, preencha todos os campos!")
+      setFormError("Por favor, preencha todos os campos!");
     }
 
     if(formError) return;
@@ -46,7 +46,7 @@ const CreatePost = () => {
       title,
       image,
       body,
-      tagArray,
+      tagsArray,
       uid: user.uid,
       createdBy: user.displayName
     });
