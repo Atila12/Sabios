@@ -12,7 +12,8 @@ export default function Navbar() {
     <nav className={styles.navbar} aria-label="Navegação principal">
       {/* Brand */}
       <Link to="/" className={styles.brand}>
-        TI <span>Blog</span>
+          TRANSIRE
+          <strong>DAY</strong>       
       </Link>
 
       <ul className={styles.links_list}>
@@ -47,7 +48,7 @@ export default function Navbar() {
           </>
         )}
         {user && (
-            <>
+          <>
             <li>
               <NavLink
                 to="/posts/create" // padronize a rota em minúsculas
@@ -76,11 +77,11 @@ export default function Navbar() {
           </NavLink>
         </li>
         {user && (
-            <li>
-                <button onClick={logout}>
-                    Sair
-                </button>
-            </li>
+          <li>
+            <button onClick={logout}>
+              Sair
+            </button>
+          </li>
         )}
       </ul>
     </nav>

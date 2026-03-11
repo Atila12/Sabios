@@ -6,14 +6,26 @@
     padding: .5em 2em;
 }
 
-.brad {
-    font-size: 1.2em;
+
+.brand {
+    font-size: 1.6em;
 }
 
-.brad span {
+.brand span {
     font-weight: 900;
     text-transform: uppercase;
 }
+
+
+.brand span:hover {
+    color: #bbb
+}
+
+
+.brand strong {
+    color: #22c55e;
+}
+
 
 .links_list {
     display: flex;
