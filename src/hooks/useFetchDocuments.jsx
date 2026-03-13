@@ -62,4 +62,3 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
 
     return { documents, loading, error };
 };
-
