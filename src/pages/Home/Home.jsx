@@ -7,6 +7,7 @@ import { useFetchDocuments } from "../../hooks/useFetchDocuments";
 
 //components home lista  postagem recente s e possui  um campo de busca (ainda não conectado à consulta)
 import PostDetail from "../../components/PostDetail";
+
 const Home = () => {
     // Estado local para armazenar o texto digitado no campo de busca
     const [query, setQuery] = useState("");

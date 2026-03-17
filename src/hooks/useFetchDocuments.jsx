@@ -14,27 +14,26 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
     useEffect(() => {
 
         async function loadData() {
-
             if (cancelled) return
 
             setLoading(true)
 
-            const collectionRef = await collection(db, docCollection);
+            const collectionRef = await collection(db, docCollection)
 
             try {
 
                 let q;
               
                 if (search){
-                    q = await query(collectionRef, where("tagsArray", "array-contains", search), orderBy("createdAt", "desc"));
+                    q = await query(collectionRef, 
+                        where("tagsArray", "array-contains", search), 
+                        orderBy("createdAt", "desc"));
                 } else {
                     q = await query(collectionRef, orderBy("createdAt", "desc"));
                 }
 
                 await onSnapshot(q, (querySnapshot) => {
-
                     setDocuments(
-
                         querySnapshot.docs?.map((doc) => ({
                             id: doc.id,
                             ...doc.data(),
@@ -51,11 +50,11 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
                 setLoading(false);
             }
         }
-        loadData();
 
+        loadData();
     }, [docCollection, search, uid, cancelled]);
 
-
+    // Não deixa carregar os dados do componente quando ele desmontar.Só remonta quando precisar utilizar novamente.
     useEffect(() => {
         return () => setCancelled(true);
     }, []);
