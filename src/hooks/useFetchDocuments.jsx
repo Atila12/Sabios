@@ -53,7 +53,8 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
         }
 
         loadData();
-    }, [docCollection, search, uid, cancelled]);
+        
+    }, [docCollection, documents, search, uid, cancelled]);
 
     // Não deixa carregar os dados do componente quando ele desmontar.Só remonta quando precisar utilizar novamente.
     useEffect(() => {
